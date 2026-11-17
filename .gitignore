@@ -1,0 +1,5 @@
+# 字体下载缓存与本地预览截图
+tools/.cache/
+
+# 改造前的单文件版本：APK 与截图已拆到 download/、assets/，这份只留本地
+七班杀官网.html

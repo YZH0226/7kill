@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0e0c0a">
+<title>七班杀 · 江西师大附中 2023 级 7 班 · 师生对决</title>
+<meta name="description" content="七班杀：把全班 55 位师生写进牌桌的三国杀式卡牌游戏。单机挑战 AI，联机房间码开黑，安卓版直接下载。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%23100d0b'/%3E%3Crect x='4.5' y='4.5' width='55' height='55' rx='10' fill='none' stroke='%23c9a227' stroke-width='1.5'/%3E%3Ctext x='32' y='44' font-size='33' font-family='serif' font-weight='700' text-anchor='middle' fill='%23e8c766'%3E%E4%B8%83%3C/text%3E%3C/svg%3E">
+<link rel="canonical" href="https://yzhhust.github.io/7kill.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="七班杀">
+<meta property="og:title" content="七班杀 · 江西师大附中 2023 级 7 班 · 师生对决">
+<meta property="og:description" content="把全班 55 位师生写进牌桌的三国杀式卡牌游戏。单机挑战 AI，联机房间码开黑，安卓版直接下载。">
+<meta property="og:url" content="https://yzhhust.github.io/7kill.github.io/">
+<meta property="og:image" content="https://yzhhust.github.io/7kill.github.io/assets/img/hero-ui.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="七班杀 · 江西师大附中 2023 级 7 班">
+<meta name="twitter:description" content="把全班 55 位师生写进牌桌的三国杀式卡牌游戏，安卓版直接下载。">
+<meta name="twitter:image" content="https://yzhhust.github.io/7kill.github.io/assets/img/hero-ui.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"VideoGame","name":"七班杀","alternateName":"7kill","applicationCategory":"GameApplication","operatingSystem":"Android 5.0+","inLanguage":"zh-CN","description":"江西师大附中 2023 级 7 班的班级自制卡牌游戏：55 名师生角色、150 个技能，单机对战 AI，联机房间码最多 4 人。","downloadUrl":"https://yzhhust.github.io/7kill.github.io/download/%E4%B8%83%E7%8F%AD%E6%9D%80-v1.3.5.apk","offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"}}
+</script>
+<style>
+/* ===== 七班杀 · 站点样式（沿用 APP 的墨黑 / 赤金视觉体系） ===== */
+
+/* 中文字体：按本站字符集裁剪过的 Noto Serif / Sans SC（原 11 MB 全量 TTF → 约 0.9 MB） */
+@font-face{font-family:"Noto Serif SC";font-style:normal;font-weight:400;font-display:swap;
+  src:url("assets/fonts/noto-serif-sc.woff2") format("woff2")}
+@font-face{font-family:"Noto Sans SC";font-style:normal;font-weight:400;font-display:swap;
+  src:url("assets/fonts/noto-sans-sc.woff2") format("woff2")}
+:root{
+  --ink:#0e0c0a; --ink2:#181412; --panel:#1f1a16; --line:#3a2f26; --line2:#5a4a2c;
+  --paper:#f2e6cd; --paper2:#e7d8b8; --gold:#c9a227; --gold2:#e8c766;
+  --red:#b3382c; --red2:#e0523f; --jade:#3f8f6f;
+  --txt:#e9dfcc; --dim:#a1957f; --faint:#7b7161;
+  --serif:"Noto Serif SC","Songti SC","Source Han Serif SC","Source Han Serif CN","STSong","SimSun",serif;
+  --sans:"Noto Sans SC",-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif;
+  --max:1160px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ink);color:var(--txt);font-family:var(--sans);
+  font-weight:300;line-height:1.8;-webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(120% 62% at 50% -10%,rgba(201,162,39,.17),transparent 62%),
+    radial-gradient(62% 46% at 96% 6%,rgba(179,56,44,.13),transparent 72%),
+    linear-gradient(180deg,#191411,#0b0a09 42%,#080706);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.32;
+  background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:3px 3px;
+}
+.page{position:relative;z-index:1}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font-family:inherit;color:inherit;border:0;background:none;cursor:pointer}
+:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
+
+/* ---------- 顶栏 ---------- */
+.nav{position:sticky;top:0;z-index:40;background:rgba(14,12,10,.86);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:var(--max);margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand-seal{flex:0 0 auto;width:34px;height:34px;border-radius:9px;border:1px solid #c0392b;
+  background:linear-gradient(180deg,#8f2c22,#6b1f18);display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:19px;color:#ffe9c9;box-shadow:0 4px 12px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.12)}
+.brand-tx{display:flex;flex-direction:column;line-height:1.2}
+.brand-nm{font-family:var(--serif);font-size:16px;letter-spacing:4px;color:var(--paper)}
+.brand-sb{font-size:9.5px;letter-spacing:2px;color:var(--faint);margin-top:2px}
+.nav-links{display:flex;gap:26px;margin-left:auto;align-items:center}
+.nav-links a{font-size:12.5px;letter-spacing:2px;color:var(--dim);text-decoration:none;padding:4px 0;
+  border-bottom:1px solid transparent;transition:color .16s,border-color .16s}
+.nav-links a:hover{color:var(--gold2);border-bottom-color:#6b5a3a}
+.nav-btn{display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:10px;border:1px solid var(--line2);
+  text-decoration:none;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+  font-family:var(--serif);font-size:13px;letter-spacing:2px;color:#e6d8bd;margin-left:22px;
+  transition:border-color .16s,background .16s,transform .12s}
+.nav-btn:hover{border-color:var(--gold);color:#fff3d4}
+.nav-btn:active{transform:scale(.97)}
+
+/* ---------- 首屏 ---------- */
+.hero{position:relative;max-width:var(--max);margin:0 auto;padding:64px 24px 56px;
+  display:grid;grid-template-columns:1.06fr .94fr;gap:40px;align-items:center}
+.hero > *{min-width:0}
+.hero-tag{display:flex;align-items:center;gap:14px;max-width:308px;color:#b09a6c;
+  font-family:var(--serif);font-size:10.5px;letter-spacing:7px}
+.hero-tag .ln{flex:1;height:1px;background:linear-gradient(90deg,transparent,#6b5a3a,transparent)}
+.hero h1{margin:16px 0 0;font-family:var(--serif);font-weight:900;line-height:1.02;
+  font-size:clamp(58px,8.6vw,102px);letter-spacing:.1em;padding-left:.1em;
+  background:linear-gradient(180deg,#f6e5b8,#c9a227 58%,#8c6f18);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 8px 34px rgba(201,162,39,.22)}
+.hero-sub{margin:14px 0 0;font-family:var(--serif);font-size:12.5px;letter-spacing:3.6px;color:var(--dim)}
+
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center;min-height:520px}
+.hero-visual .halo{position:absolute;width:460px;height:460px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,162,39,.18),rgba(201,162,39,.04) 42%,transparent 68%)}
+.hero-visual .ring{position:absolute;width:380px;height:380px;border-radius:50%;
+  border:1px solid rgba(201,162,39,.22)}
+.hero-visual .ring2{position:absolute;width:300px;height:300px;border-radius:50%;
+  border:1px solid rgba(201,162,39,.12)}
+.phone{position:relative;width:266px;border-radius:30px;padding:9px;background:linear-gradient(160deg,#2a211b,#14100d);
+  border:1px solid #4a3b28;box-shadow:0 34px 70px rgba(0,0,0,.62),0 0 0 1px rgba(201,162,39,.14),inset 0 1px 0 rgba(255,255,255,.08);
+  transform:rotate(-1.6deg);animation:float 9s ease-in-out infinite}
+@keyframes float{0%,100%{transform:rotate(-1.6deg) translateY(0)}50%{transform:rotate(-1.6deg) translateY(-10px)}}
+.phone img{width:100%;border-radius:22px;display:block;background:#0b0908}
+.phone::after{content:"";position:absolute;top:15px;left:50%;transform:translateX(-50%);
+  width:52px;height:5px;border-radius:3px;background:rgba(0,0,0,.55);z-index:2}
+.phone-cap{position:absolute;bottom:-2px;left:50%;transform:translate(-50%,100%);
+  white-space:nowrap;font-size:10.5px;letter-spacing:2px;color:#6f6658}
+.hero-seal{position:absolute;top:36px;right:6px;width:62px;height:62px;border:2px solid rgba(179,56,44,.55);
+  border-radius:8px;display:flex;align-items:center;justify-content:center;transform:rotate(7deg);
+  font-family:var(--serif);font-size:36px;color:rgba(179,56,44,.6);line-height:1}
+
+/* ---------- 章节骨架 ---------- */
+.sec{max-width:var(--max);margin:0 auto;padding:74px 24px 10px}
+.sec-head{display:flex;align-items:center;gap:16px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.seal{flex:0 0 auto;width:40px;height:40px;border:1px solid var(--line2);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:19px;
+  color:var(--gold2);background:rgba(201,162,39,.07);box-shadow:inset 0 0 14px rgba(201,162,39,.1)}
+.sec-t{font-family:var(--serif);font-size:24px;letter-spacing:5px;color:var(--paper);line-height:1.2}
+.sec-n{margin-left:auto;font-size:10.5px;letter-spacing:2.6px;color:var(--faint);text-align:right}
+
+/* ---------- 玩法 ---------- */
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+.panel{background:linear-gradient(180deg,#1e1814,#151110);border:1px solid var(--line);
+  border-radius:14px;padding:20px 22px;box-shadow:0 10px 26px rgba(0,0,0,.3)}
+.panel h3{margin:0 0 10px;font-family:var(--serif);font-size:16px;font-weight:600;
+  letter-spacing:3px;color:var(--paper)}
+.panel p{margin:0 0 9px;font-size:13px;line-height:1.85;color:#b9ae9b}
+.panel p:last-child{margin-bottom:0}
+.panel p b{font-weight:500;color:var(--gold2)}
+.panel p em{font-style:normal;color:#8fc7ab}
+
+/* 手牌条 */
+.handbar{display:flex;gap:12px;align-items:flex-end;margin-top:26px;padding:22px 22px 26px;
+  background:linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,.008));
+  border:1px solid var(--line);border-radius:14px}
+.handbar .cap{flex:0 0 150px;align-self:center}
+.handbar .cap h4{margin:0 0 6px;font-family:var(--serif);font-size:15px;letter-spacing:2px;color:var(--paper);font-weight:600}
+.handbar .cap p{margin:0;font-size:11.5px;line-height:1.7;color:var(--faint)}
+.cards{display:flex;gap:10px;flex-wrap:wrap}
+.pcard{position:relative;width:82px;height:116px;border-radius:7px;color:#241a12;
+  background:linear-gradient(180deg,#f8f0da,#e6d6b4);border:1px solid #cbb98f;
+  box-shadow:0 8px 18px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.7);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  font-family:var(--serif);transition:transform .16s ease}
+.pcard:hover{transform:translateY(-5px) rotate(-1deg)}
+.pcard .suit{position:absolute;top:5px;left:6px;font-size:11px;color:#8a2f22}
+.pcard .suit.r{color:#b3382c}
+.pcard .nm{font-size:24px;letter-spacing:1px;font-weight:600;line-height:1.1;margin-top:8px}
+.pcard .tp{font-size:9px;letter-spacing:1px;color:#6d5a44}
+.pcard.flip{background:linear-gradient(180deg,#7a2a22,#571b16);border-color:#8f3a30;color:#f2e6cd}
+.pcard.flip .nm{font-size:20px;letter-spacing:3px;margin-top:0}
+.pcard.flip .tp{color:#d9b39a}
+
+/* ---------- 图鉴 ---------- */
+.codex-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:24px 0 6px}
+.chip{padding:7px 15px;border-radius:20px;border:1px solid var(--line);font-size:12px;
+  letter-spacing:1.4px;color:var(--dim);background:rgba(255,255,255,.02);transition:all .16s}
+.chip:hover{border-color:var(--line2);color:#e6d8bd}
+.chip.on{background:linear-gradient(180deg,#8f2c22,#6b1f18);border-color:#b3382c;color:#ffe9c9}
+.search{margin-left:auto;display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;
+  border:1px solid var(--line);background:#0f0d0b;min-width:210px}
+.search svg{flex:0 0 auto;width:14px;height:14px;stroke:#8d8272;fill:none;stroke-width:1.6}
+.search input{flex:1;min-width:0;border:0;background:none;outline:none;color:#d8c7a6;
+  font-family:var(--sans);font-size:12.5px;letter-spacing:.6px}
+.search input::placeholder{color:#6d655a}
+.codex-count{margin:12px 0 10px;font-size:11px;letter-spacing:2px;color:var(--faint)}
+.cg{display:grid;grid-template-columns:repeat(6,1fr);gap:11px}
+.cc{position:relative;border-radius:12px;padding:12px 8px 10px;text-align:center;cursor:pointer;
+  background:linear-gradient(180deg,#221b17,#171310);border:1px solid var(--line);
+  transition:transform .14s ease,border-color .16s ease,box-shadow .16s ease}
+.cc:hover{transform:translateY(-3px);border-color:var(--line2);box-shadow:0 10px 24px rgba(0,0,0,.42)}
+.cc .av{width:48px;height:48px;margin:0 auto 8px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;font-family:var(--serif);font-size:23px;color:#fff;
+  box-shadow:inset 0 -12px 22px rgba(0,0,0,.32),0 4px 10px rgba(0,0,0,.3)}
+.cc .nm{font-family:var(--serif);font-size:13.5px;letter-spacing:1.4px;color:var(--paper);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cc .hp{font-size:9px;letter-spacing:2px;color:var(--red2);margin-top:3px}
+.cc .fa{position:absolute;right:5px;top:5px;font-size:8.5px;line-height:1.5;padding:0 5px;border-radius:8px;
+  background:rgba(0,0,0,.45);color:#dcc9a5;border:1px solid rgba(255,255,255,.12)}
+.cc .sk{font-size:9.5px;color:#8b8172;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ---------- 制作 ---------- */
+.makers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+.mk{padding:20px 22px;border-radius:14px;border:1px solid var(--line);background:linear-gradient(180deg,#1d1814,#151110)}
+.mk .role{font-size:10px;letter-spacing:2.6px;color:var(--faint)}
+.mk .who{font-family:var(--serif);font-size:16px;letter-spacing:2px;color:var(--paper);margin-top:7px;line-height:1.5}
+.mk .note{font-size:11px;color:#8b8172;margin-top:8px;line-height:1.7}
+
+/* ---------- 页脚 ---------- */
+.foot{margin-top:70px;border-top:1px solid var(--line);background:linear-gradient(180deg,rgba(25,20,17,.6),rgba(8,7,6,.9))}
+.foot-in{max-width:var(--max);margin:0 auto;padding:34px 24px 40px;display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap}
+.foot-seal{width:44px;height:44px;border:1px solid rgba(179,56,44,.5);border-radius:8px;display:flex;
+  align-items:center;justify-content:center;font-family:var(--serif);font-size:25px;color:rgba(179,56,44,.62);transform:rotate(-6deg)}
+.foot-tx{flex:1;min-width:220px}
+.foot-tx p{margin:0 0 6px;font-size:11px;line-height:1.8;color:#7d7466;letter-spacing:.6px}
+.foot-tx p b{color:#a89d8b;font-weight:400}
+.foot-links{display:flex;gap:18px;flex-wrap:wrap;font-size:11px;color:#6f6658}
+.foot-links a{text-decoration:none;color:#8b8172}
+.foot-links a:hover{color:var(--gold2)}
+
+/* ---------- 角色弹层 ---------- */
+.modal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;
+  padding:20px;background:rgba(6,5,4,.84);backdrop-filter:blur(3px)}
+.modal.on{display:flex}
+.modal-card{width:100%;max-width:440px;max-height:82vh;overflow:auto;border-radius:16px;
+  border:1px solid #4a3b28;background:linear-gradient(180deg,#241d18,#141110);
+  box-shadow:0 30px 70px rgba(0,0,0,.7);padding:20px 22px 22px;animation:pop .18s ease}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
+.mc-head{display:flex;align-items:center;gap:12px}
+.mc-av{width:52px;height:52px;border-radius:13px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:25px;color:#fff;box-shadow:inset 0 -12px 22px rgba(0,0,0,.3)}
+.mc-nm{font-family:var(--serif);font-size:18px;letter-spacing:3px;color:var(--paper)}
+.mc-meta{font-size:10.5px;letter-spacing:1.4px;color:var(--faint);margin-top:3px}
+.mc-close{margin-left:auto;width:30px;height:30px;border-radius:8px;border:1px solid var(--line);
+  color:var(--dim);display:flex;align-items:center;justify-content:center;font-size:15px}
+.mc-close:hover{color:var(--paper);border-color:var(--line2)}
+.mc-body{margin-top:16px;display:flex;flex-direction:column;gap:10px}
+.skill{padding:12px 13px;border-radius:10px;border:1px solid rgba(58,47,38,.85);background:rgba(255,255,255,.025)}
+.skill .top{display:flex;align-items:center;gap:8px}
+.skill .sn{font-family:var(--serif);font-size:14px;letter-spacing:1.6px;color:var(--gold2)}
+.skill .kind{font-size:9px;letter-spacing:1px;padding:1px 6px;border-radius:6px;border:1px solid #5a4a2c;color:#d8c7a6}
+.skill .sd{margin:7px 0 0;font-size:11.5px;line-height:1.8;color:#a89d8b}
+.mc-foot{margin-top:14px;font-size:10px;letter-spacing:1px;color:#6d655a}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:1024px){
+  .cg{grid-template-columns:repeat(5,1fr)}
+  .hero{grid-template-columns:1fr;gap:28px;padding-top:52px}
+  .hero-visual{min-height:0;margin-top:10px}
+  .hero-visual .halo{width:360px;height:360px}
+  .hero-visual .ring{width:300px;height:300px}
+  .hero-visual .ring2{display:none}
+  .hero-seal{display:none}
+}
+@media (max-width:900px){
+  .nav-links{display:none}
+  .rules{grid-template-columns:1fr}
+  .makers{grid-template-columns:1fr}
+  .hero-visual .phone-cap{position:static;transform:none;margin-top:14px;text-align:center}
+  .hero-visual{flex-direction:column;align-items:center}
+}
+@media (max-width:820px){
+  .cg{grid-template-columns:repeat(4,1fr)}
+}
+@media (max-width:640px){
+  .nav-in{padding:10px 16px}
+  .nav-btn{margin-left:auto;padding:7px 12px;font-size:12px}
+  .hero{padding:40px 18px 40px}
+  .hero h1{font-size:clamp(50px,15vw,74px);letter-spacing:.08em}
+  .sec-head{padding-bottom:14px;gap:12px}
+  .sec-t{font-size:19px;letter-spacing:3px}
+  .sec-n{display:none}
+  .seal{width:34px;height:34px;font-size:16px}
+  .sec{padding:56px 18px 6px}
+  .phone{width:230px}
+  .handbar{flex-direction:column;align-items:flex-start;gap:16px}
+  .handbar .cap{flex:0 0 auto}
+  .cg{grid-template-columns:repeat(3,1fr);gap:9px}
+  .cc .av{width:42px;height:42px;font-size:20px}
+  .cc .nm{font-size:12.5px}
+  .search{margin-left:0;width:100%}
+  .foot-in{padding:28px 18px 34px}
+}
+@media (max-width:400px){
+  .cg{grid-template-columns:repeat(2,1fr)}
+  .cards{gap:8px}
+  .pcard{width:74px;height:104px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important;scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ===== 顶栏 ===== -->
+<header class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top" style="text-decoration:none">
+      <span class="brand-seal" aria-hidden="true">七</span>
+      <span class="brand-tx">
+        <span class="brand-nm">七班杀</span>
+        <span class="brand-sb">2023 级 7 班 · 师生对决</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="页面导航">
+      <a href="#rules">玩法</a>
+      <a href="#codex">图鉴</a>
+    </nav>
+    <a class="nav-btn" href="download/七班杀-v1.3.5.apk" download="七班杀-v1.3.5.apk" data-dl>下载安卓版</a>
+  </div>
+</header>
+
+<!-- ===== 首屏 ===== -->
+<main id="top">
+<section class="hero">
+  <div>
+    <div class="hero-tag">
+      <span class="ln"></span><span>2 0 2 3 · 7</span><span class="ln"></span>
+    </div>
+    <h1>七班杀</h1>
+    <p class="hero-sub">江西师大附中 2023 级 7 班 · 师生对决</p>
+  </div>
+  <div class="hero-visual">
+    <div class="halo" aria-hidden="true"></div>
+    <div class="ring" aria-hidden="true"></div>
+    <div class="ring2" aria-hidden="true"></div>
+    <div class="hero-seal" aria-hidden="true">杀</div>
+    <div class="phone">
+      <img src="assets/img/hero-ui.jpg" width="640" height="1421" decoding="async" alt="七班杀对局界面：六个位次、中央回合信息、战报与手牌">
+    </div>
+    <div class="phone-cap">对局界面 · 6 人混战 · v1.3.5</div>
+  </div>
+</section>
+
+<!-- ===== 壹 · 玩法 ===== -->
+<section class="sec" id="rules">
+  <div class="sec-head">
+    <span class="seal" aria-hidden="true">壹</span>
+    <span class="sec-t">怎么玩</span>
+    <span class="sec-n">规则速览</span>
+  </div>
+  <div class="rules">
+    <div class="panel">
+      <h3>胜负目标</h3>
+      <p><b>混战</b>：击败其他所有角色，最后存活者获胜。</p>
+      <p><b>阵营战</b>：与队友配合，击败对方阵营的全部角色。</p>
+      <p>全员阵亡，或鏖战 <b>30 轮</b>仍未分胜负，判为平局。</p>
+    </div>
+    <div class="panel">
+      <h3>回合流程</h3>
+      <p>准备阶段 → 判定阶段 → 摸牌阶段（摸两张）→ 出牌阶段 → 弃牌阶段，依次循环。</p>
+      <p>手牌上限等于当前体力，弃牌阶段需要弃至上限。</p>
+      <p>延时锦囊（如【乐不思蜀】）在判定阶段结算。</p>
+    </div>
+    <div class="panel">
+      <h3>基本牌</h3>
+      <p><b>【杀】</b>对攻击范围内一名角色使用，对方需打出【闪】，否则受到 1 点伤害；【火杀】【雷杀】是带属性的【杀】。</p>
+      <p><b>【闪】</b>抵消一张【杀】。<b>【桃】</b>回复 1 点体力，濒死时可自救。</p>
+      <p><b>【酒】</b>本回合下一张【杀】伤害 +1，每回合限一次。</p>
+    </div>
+    <div class="panel">
+      <h3>锦囊与装备</h3>
+      <p><b>【决斗】</b>轮流出【杀】，先不出者受伤；<b>【过河拆桥】</b>弃置目标一张牌；<b>【顺手牵羊】</b>获得距离 1 内一张牌；<b>【无中生有】</b>摸两张。</p>
+      <p><b>【万箭齐发】</b>全场需【闪】；<b>【南蛮入侵】</b>全场需【杀】；<b>【无懈可击】</b>抵消锦囊，也能被反制；<b>【乐不思蜀】</b>判定非红桃则跳过出牌阶段。</p>
+      <p>装备含<b>武器</b>（诸葛连弩、青釭剑、贯石斧、方天画戟）、<b>防具</b>（八卦阵、仁王盾）与<b>坐骑</b>（赤兔、大宛、的卢、绝影）。</p>
+    </div>
+    <div class="panel">
+      <h3>操作方式</h3>
+      <p>点手牌 →（需要时）点上方高亮角色指定目标 → 点<b>【确定】</b>打出。</p>
+      <p>技能按钮出现在手牌上方；灰色表示本回合已用过或条件不满足。</p>
+      <p>点任意角色头像，可查看其技能、装备与坐骑详情。</p>
+    </div>
+    <div class="panel">
+      <h3>联机与记录</h3>
+      <p>创建房间后生成 <b>4 位房间码</b>，最多 4 人；全员选将并准备后由房主开局。</p>
+      <p>联机经由公共 MQTT 中继，也可填入自建服务器地址。</p>
+      <p>每局结束自动写入<b>历史记录</b>：时间、模式、人数、胜负、轮数与完整战报，只保存在本机。</p>
+    </div>
+  </div>
+
+  <div class="handbar">
+    <div class="cap">
+      <h4>手牌</h4>
+      <p>点牌、点目标、按确定。花色与点数决定【火攻】【暴算】这类技能的判定结果。</p>
+    </div>
+    <div class="cards" aria-hidden="true">
+      <div class="pcard"><span class="suit">♠</span><span class="nm">杀</span><span class="tp">基本牌 · 7</span></div>
+      <div class="pcard"><span class="suit r">♥</span><span class="nm">闪</span><span class="tp">基本牌 · 2</span></div>
+      <div class="pcard"><span class="suit r">♥</span><span class="nm">桃</span><span class="tp">基本牌 · Q</span></div>
+      <div class="pcard"><span class="suit">♣</span><span class="nm">酒</span><span class="tp">基本牌 · 9</span></div>
+      <div class="pcard"><span class="suit">♠</span><span class="nm">无懈<br>可击</span><span class="tp">锦囊牌 · J</span></div>
+      <div class="pcard flip"><span class="nm">七班杀</span><span class="tp">牌背</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 贰 · 角色图鉴 ===== -->
+<section class="sec" id="codex">
+  <div class="sec-head">
+    <span class="seal" aria-hidden="true">贰</span>
+    <span class="sec-t">角色图鉴</span>
+    <span class="sec-n">点开看技能</span>
+  </div>
+  <div class="codex-bar">
+    <button class="chip on" data-f="all">全部 55</button>
+    <button class="chip" data-f="师">老师 6</button>
+    <button class="chip" data-f="生">学生 49</button>
+    <label class="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M16.5 16.5 21 21"></path></svg>
+      <input id="q" type="search" placeholder="搜索角色或技能…" autocomplete="off">
+    </label>
+  </div>
+  <div class="codex-count" id="codex-count">共 55 名角色</div>
+  <div class="cg" id="cg"></div>
+</section>
+
+<!-- ===== 叁 · 制作 ===== -->
+<section class="sec" id="credits">
+  <div class="sec-head">
+    <span class="seal" aria-hidden="true">叁</span>
+    <span class="sec-t">制作</span>
+    <span class="sec-n">班级自制 · 非商业</span>
+  </div>
+  <div class="makers">
+    <div class="mk">
+      <div class="role">游戏策划</div>
+      <div class="who">徐承灏</div>
+      <div class="note">角色设定、技能平衡与全部原始手稿</div>
+    </div>
+    <div class="mk">
+      <div class="role">软件开发</div>
+      <div class="who">罗志华 &amp; WorkBuddy</div>
+      <div class="note">客户端架构、玩法引擎与安卓打包</div>
+    </div>
+    <div class="mk">
+      <div class="role">联合开发</div>
+      <div class="who">杨正昊 &amp; DeepSeek-V4.1-Flash</div>
+      <div class="note">界面细节、屏幕适配与站点</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 页脚 ===== -->
+<footer class="foot">
+  <div class="foot-in">
+    <span class="foot-seal" aria-hidden="true">七</span>
+    <div class="foot-tx">
+      <p><b>七班杀</b> · 江西师大附中 2023 级 7 班 · 师生对决</p>
+      <p>©七班杀 · 2026 All Rights Reserved · 班级自制，非商业用途</p>
+    </div>
+    <nav class="foot-links" aria-label="页脚导航">
+      <a href="#rules">玩法</a>
+      <a href="#codex">图鉴</a>
+      <a href="#top">回到顶部</a>
+    </nav>
+  </div>
+</footer>
+</main>
+
+<!-- ===== 角色弹层 ===== -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="角色详情">
+  <div class="modal-card">
+    <div class="mc-head">
+      <div class="mc-av" id="mc-av">七</div>
+      <div>
+        <div class="mc-nm" id="mc-nm">角色</div>
+        <div class="mc-meta" id="mc-meta"></div>
+      </div>
+      <button class="mc-close" id="mc-close" aria-label="关闭">×</button>
+    </div>
+    <div class="mc-body" id="mc-body"></div>
+    <div class="mc-foot">技能文本摘自游戏内角色设定，完整效果以客户端为准</div>
+  </div>
+</div>
+
+<script>
+/* ===== 角色数据（由游戏 data_chars.js 提取） ===== */
+const CHARS = [{"n":"黄成钰","f":"师","hp":3,"col":"#e0563f","sk":[["抽背","普通","你的回合结束时，你可以指定一名角色并令其说出本回合内你打出的牌的顺序及丢弃的牌的种类与数量。若其说出，其摸2张牌；若其未说出，你"],["默写","普通","在你的回合外，你可以记录一个牌类（不与上回合相同），在你的下一个回合开始前，你可以将手牌当作该牌类中的一张使用。"],["岩化","锁定技","当你受到1点元素伤害时，你摸1张牌并将1张手牌扣置在你的武将牌上称为“岩”，你的手牌上限+X（X为“岩”的数量）。若你的回合开始"]]},{"n":"周丽","f":"师","hp":4,"col":"#3f78e0","sk":[["暴算","普通","当其他角色的弃牌阶段结束后，你可以选择一项或两项：① 计算其于回合内打出、弃置的牌的点数之和 ② 计算其于回合内打出、弃置的牌的"],["肃静","限定技","你可以令至多4名角色跳过至多3回合，这些角色各执行等量个摸牌阶段。"]]},{"n":"秦欢华","f":"师","hp":3,"col":"#8e44ad","sk":[["四宝","普通","当有角色在其回合外因响应而失去牌后，你可以令该角色进行一次判定。若结果为：♥：其摸2张牌；♦：其回复1点体力；♠：其对使其失去牌"],["词测","普通","摸牌阶段，你可以放弃摸牌，改为声明一个除装备牌外的牌名，然后你翻开牌堆顶的牌直至出现你声明的牌名，随后你令一名其他角色选择一项："]]},{"n":"李辉","f":"师","hp":3,"col":"#16a085","sk":[["经验","锁定技","“♥”杀对你无效，你受到的雷电伤害-1。"],["致用","普通","你的回合开始时，你可以选择一名其他角色的技能进行复制（永久有效），你每复制一个技能，你的体力上限-1，复制的技能均视为锁定技（限"]]},{"n":"甘桦丽","f":"师","hp":3,"col":"#d35400","sk":[["提问","普通","出牌阶段限1次，你可以与一名其他角色各从牌堆摸一张牌进行拼点，若你赢，则你获得两张拼点的牌，若你没赢，则其获得你拼点的牌。"],["解释","锁定技","你的♥牌均视为K。"],["再生","觉醒技","当你进入濒死状态，你将体力恢复至两点，并修改【解释】与【提问】。"]]},{"n":"邱宏伟","f":"师","hp":3,"col":"#c0392b","sk":[["突击","锁定技","准备阶段，你选择一名敌方角色，对其视为使用一张无距离限制的雷【杀】。"],["幻凡","普通","出牌阶段限一次，你可以挑选一个宝物（不与上回合相同），其效果持续到你下回合开始：火男：你可以对一名手牌数小于你的角色造成1点火焰"],["煎熬","主公技","限定技，当你进入濒死状态时，你可令其他生势力角色是否令你回复一点体力并增加1点体力上限。选择“是”的角色在此次结算结束后扣减1点"]]},{"n":"蔡雨惠","f":"生","hp":4,"col":"#7f8c8d","sk":[["记忆","普通","游戏开始时，你获得3个“忆”标记。你的回合结束时，你获得一个“忆”标记。出牌阶段限1次，你可以弃一枚“忆”标记并令一名角色翻面，"],["食腐","限定技","其他角色死亡时，你可以扣减1点体力上限并选择一项：① 体力上限+X（X为该角色的体力上限）② 获得其一个技能并视为锁定技（限定技"]]},{"n":"程冠东","f":"生","hp":3,"col":"#2980b9","sk":[["商谈","转换技","锁定技，你的准备阶段开始时，你选择1名其他角色并如此做：①你从牌堆底摸2张牌并弃置其1张牌 ②其从牌堆底摸1张牌并弃置你2张牌。"],["分红","普通","你的回合结束时，你可以获得于本回合进入弃牌堆中的牌中的X张（X为本回合进入弃牌堆中的牌的一半且不超过4，向下取整），然后你将剩余"],["战略","锁定技","当你于回合内第一次使用基本牌时，你须先弃置1张牌。"]]},{"n":"程敏浩","f":"生","hp":3,"col":"#95a5a6","sk":[["失事","普通","当一名其他角色成为一张锦囊牌的目标时，你可以令其选择一项：①其对你造成1点雷电伤害，令此牌无效，其下个回合非锁定技能失效 ②其令"],["机长","锁定技","你的手牌上限永远为3。当你的体力值为1时，防止所有技能对你造成的伤害。"]]},{"n":"丁美心","f":"生","hp":3,"col":"#e91e63","sk":[["优胜","锁定技","你使用点数不大于10的牌无距离限制，使用点数大于10的牌无次数限制。"],["单打","普通","你的出牌阶段开始时，你可以进行一次判定，并获得该判定牌。回合内限1次，你可以将与判定牌颜色不同的一张手牌当作【决斗】使用（打出时"],["典范","普通","你的回合结束时，你可以挑选一名其他角色（不与上回合相同）。当你于回合外首次成为【杀】的目标时，其代替你成为此牌目标。"]]},{"n":"董彦宽","f":"生","hp":3,"col":"#f39c12","sk":[["傀儡","普通","游戏开始时，你获得3个“傀”标记。你的回合开始时，你可以将“傀”标记放在一名武将旁，有“傀”标记的角色摸牌阶段多摸1张牌且出牌阶"],["怜悯","普通","当其他角色不因【闪电】而进入濒死状态时，你获得1个“傀”标记并获得使其进入濒死状态的牌。此时你可以弃置4种花色的牌并令该角色将体"],["精英","觉醒技","当你进入濒死状态时，你将体力恢复至两点，然后修改【怜悯】。"]]},{"n":"范奥祁","f":"生","hp":3,"col":"#34495e","sk":[["讽刺","锁定技","你的手牌上限每回合+X，在结束阶段你摸1张牌（X为你于每个回合内受到的伤害量）。"],["回怼","普通","每名其他角色的回合限一次，当你成为1张牌的目标时，你可以选择一项：①你无法响应此牌，在该牌结算完成后，你获得此牌，在你的下个回合"]]},{"n":"冯苏杰","f":"生","hp":4,"col":"#27ae60","sk":[["猎豹","锁定技","其他角色计算与你的距离+1，当你于回合外每使用2张基本牌时，你摸1张牌。"],["六点","锁定技","弃牌阶段结束后，若你弃的牌的点数之和为6的倍数，则你弃置所有其他角色各1张手牌。"],["博弈","锁定技","你使用的【过河拆桥】多指定一个目标。"]]},{"n":"葛美妍","f":"生","hp":3,"col":"#9b59b6","sk":[["多疑","普通","出牌阶段限一次，你可以将【杀】对自己使用（不计入次数）并令这张【杀】无法被响应。若如此做，你使用的下一张牌也无法被响应且下一回合"],["互损","转换技","你的回合开始时，你可以选择一名其他角色并如此做：①在其下一回合开始前，你与其视为处于连环状态 ②两人手牌互换，回合结束时你与其再"]]},{"n":"龚霄翰","f":"生","hp":3,"col":"#5f6d7a","sk":[["仁济","锁定技","当你于回合内或回合外打出1张牌时，你进行一次判定，若判定牌与你打出的牌的种类相同，则你收回打出的牌；若不同，则你将判定牌交给全场"],["休眠","锁定技","每三个回合，你翻回正面，在翻回正面前你摸2张牌，你可以将这2张牌当作任意基本牌打出（仅于翻回正面期间有效）。"],["角落","锁定技","【顺手牵羊】【万箭齐发】对你无效。"]]},{"n":"黄祎明","f":"生","hp":4,"col":"#f1c40f","sk":[["献策","普通","每名其他角色的回合限一次，你可以令其选择一项：① 你受到其造成的1点火焰伤害，然后其视为使用【五谷丰登】② 你弃置其1张牌，然后"],["单打","普通","你的出牌阶段开始时，你可以进行一次判定并获得该判定牌，回合内限一次，你可以将所有与判定牌颜色不同的手牌当作【决斗】打出，随后你与"]]},{"n":"黄钰涵","f":"生","hp":4,"col":"#1abc9c","sk":[["扫马","锁定技","游戏开始时，你废除你的坐骑栏，你计算与其他角色的距离-X，其他角色计算与你的距离+X（X为你损失的体力值）。当你对装备坐骑的角色"],["寻亲","锁定技","坐骑牌不计入你的手牌上限，你的红色坐骑牌视为“闪”，黑色坐骑牌视为【雷杀】且无距离限制。"]]},{"n":"蒋函谏","f":"生","hp":3,"col":"#e67e22","sk":[["机灵","锁定技","你计算与其他角色的距离-1。"],["唬牌","普通","出牌阶段限X次，你可以将一张手牌扣置于中央区域并声明这张牌的颜色，随后令所有其他角色选择“信”或“不信”，然后你翻开这张牌，选择"],["乌诺","锁定技","若你的手牌数不大于1，【杀】与【决斗】对你无效。"]]},{"n":"柯雄凯","f":"生","hp":4,"col":"#2c3e50","sk":[["校助","锁定技","若【朱斌】在场，你扣减1点体力上限并失去【猛攻】，获得【朱斌】的1个技能。"],["铁卫","锁定技","若你没有防具，你视为装备【八卦阵】。"],["猛攻","锁定技","你于出牌阶段内打出的第三张牌无法被响应。"]]},{"n":"李煦涵＆郑锡彧","f":"生","hp":3,"col":"#8e44ad","sk":[["大师","锁定技","你的手牌上限等于3，出牌阶段出【杀】次数+1。"],["妙棋","普通","出牌阶段限一次，当你使用一张【杀】时，你可以令所有其他角色都成为此牌的目标，若此【杀】造成了伤害，则你获得其他角色的各一张牌；若"],["隐世","锁定技","你没有判定阶段，延时锦囊牌对你无效。当你受到1点伤害时，若你没有手牌，则你获得其他角色的各一张牌。"]]},{"n":"刘力嘉","f":"生","hp":1,"col":"#607d8b","sk":[["不懈","锁定技","你的手牌上限为3，你的手牌不足两张时，将手牌补至2张。"],["全能","普通","你可以按如下规则将牌打出：♥：闪　♦：火杀　♠：无懈可击　♣：酒。打出时由你自行选择按牌的原本作用或花色对应作用结算。"]]},{"n":"刘芊芊","f":"生","hp":3,"col":"#ff7675","sk":[["元首","锁定技","摸牌阶段你多摸1张牌，♦杀对你无效。"],["红颜","锁定技","你的♠牌视为♥牌，你的♥牌不计入你的手牌上限。"],["天香","普通","每名其他角色的回合限1次，你可以将♥牌当作【桃】打出。"]]},{"n":"罗志华","f":"生","hp":3,"col":"#0984e3","sk":[["逻辑","锁定技","你的出牌阶段内，若你有连续3张牌的点数依次递增，则你视为对所有其他角色使用1张【杀】；若你有连续3张牌的点数依次递减，则你视为对"],["密钥","普通","结束阶段，你可以观看X名角色的手牌，然后你可以将其中X-1名角色的各一张手牌置于牌堆顶或弃置（X为与你体力值相同的角色）。"],["凌驾","限定技","当你进入濒死状态时，你从牌堆顶摸5张牌并将其中全部当作【杀】打出，若该过程中造成了角色死亡，则你增加1点体力上限并将体力恢复至3"]]},{"n":"欧阳天弈","f":"生","hp":3,"col":"#00b894","sk":[["天意","普通","当你受到1点伤害时，你可以进行一次判定，若结果为：①红色，你回复1点体力 ②黑色，伤害来源弃置X张牌或令你摸X张牌（X为你已损失"],["鸿龙","锁定技","其他角色的回合内，当该角色第一次指定除你以外的非该角色的目标时，若你在该角色攻击范围，则你也成为此牌的目标。"],["志坚","锁定技","若你的体力值为1，你使用牌无距离与次数限制。"]]},{"n":"芮修言","f":"生","hp":3,"col":"#e17055","sk":[["元首","锁定技","你于摸牌阶段内多摸1张牌，♦杀对你无效。"],["腼腆","锁定技","其他角色对你使用锦囊牌时需先弃置1张基本牌，否则该牌对你无效。"],["人脉","锁定技","你的出【杀】次数与手牌上限+X（X为生势力角色数）。"]]},{"n":"史攀成","f":"生","hp":4,"col":"#6c5ce7","sk":[["赌徒","普通","出牌阶段限一次，你可以将牌堆顶的X张牌背面朝上置于中央区域，然后你选择1种牌类并声明其数量，若猜中/未猜中，你获得你声明的牌类并"],["修炼","觉醒技","当你进入濒死状态时，你扣减1点体力上限并将体力恢复至2点，失去【赌徒】，获得【赌神】与【止损】。"],["赌神","普通","出牌阶段限一次，你可以观看牌堆顶的X张牌，随后你选择一种牌类并声明其数量，然后你令其他角色选择“是”或“否”，选择正确的角色获得"],["止损","锁定技","若你的体力值为1，【赌神】失效，此时你的手牌上限等于你的体力上限。"]]},{"n":"孙晗雨","f":"生","hp":3,"col":"#d63031","sk":[["嘲讽","锁定技","其他角色的弃牌阶段开始时，若其回合内没有造成任何伤害，你令其选择一项：①本回合其手牌上限-1 ②令你摸1张牌且下个回合手牌上限+"],["内卷","普通","结束阶段，若你本回合内打出的手牌不少于上家，你令上家进行一次判定，若点数不大于X，上家将手牌补至X；若点数大于X，则你将手牌补至"],["宝座","锁定技","若你的手牌数为全场唯一最多，其他角色无法对你使用【杀】。"]]},{"n":"汤嘉乔","f":"生","hp":3,"col":"#00cec9","sk":[["禁水","锁定技","你的【桃】与【桃园结义】视为【闪】，【酒】视为【杀】，你每打出3张基本牌便回复1点体力。"],["扣杀","普通","出牌阶段限1次，当你的【杀】造成伤害时，你令受到伤害的角色选择1项：① 令此伤害无效，你获得其两张手牌 ② 令此伤害+1，其摸2"]]},{"n":"涂佳果","f":"生","hp":3,"col":"#55efc4","sk":[["搜题","锁定技","当你受到伤害时，你展示牌堆顶的4张牌并选择点数之和不超过15的牌并获得之，以此法获得的牌在下一回合不计入你的手牌上限。"],["转生","觉醒技","当你进入濒死状态时，你将体力恢复至2点，失去【搜题】，获得【弃家】【思慕】。"],["弃家","普通","出牌阶段限一次，你可以废除你的一个装备栏，并根据废除的装备栏获得以下永久效果：①武器栏：攻击范围+1 ②坐骑栏：摸牌阶段多摸1张"],["思慕","普通","你可以将装备牌按如下规则打出：♥：火攻　♦：闪　♠：过河拆桥　♣：借刀杀人。当你的装备栏均被废除后，该技能视为锁定技。"]]},{"n":"万旋蕾＆宗嘉玲","f":"生","hp":3,"col":"#fd79a8","sk":[["寡言","转换技","锁定技，若你于出牌阶段内使用的牌不超过2张，则你：①跳过下一回合的摸牌阶段，获得所有其他角色的1张牌 ②跳过下一回合的弃牌阶段，"],["低调","锁定技","弃牌阶段结束时，若你于本回合未造成任何伤害，则你选择一项：① 令手牌最少的一名角色摸两张牌 ② 令手牌最多的一名其他角色弃置2张"]]},{"n":"王家豪","f":"生","hp":3,"col":"#636e72","sk":[["依存","锁定技","游戏开始时，你选择一名其他角色成为“依”。你获得牌时，“依”摸等量牌；“依”弃置牌时，你弃置等量的牌；“依”受到伤害时，你受到等"],["狂笑","普通","游戏开始时，你获得“笑”标记（“笑”标记对“依”无效），结束阶段，你将“笑”标记置于一名其他角色旁。有“笑”标记的角色在摸牌阶段"]]},{"n":"王梓灏","f":"生","hp":4,"col":"#fdcb6e","sk":[["戏法","锁定技","你的回合结束时，根据你本回合出的牌的花色种类数量执行以下效果：1种：在下一回合你计算与其他角色的距离-1；2种：你于下一回合内可"],["撒旦","觉醒技","当你进入濒死状态时，你扣减一点体力上限并将体力恢复至2点，并获得【圣剑】。"],["圣剑","锁定技","你的攻击范围与手牌上限+1，当你于回合内造成的伤害量超过2点时，你恢复1点体力。"]]},{"n":"吴佳俊","f":"生","hp":4,"col":"#e84393","sk":[["元首","锁定技","你于摸牌阶段内多摸1张牌。♦杀对你无效。"],["锋霸","普通","游戏开始时，你获得2个“霸”标记。你每使用1张杀，就获得1个“霸”标记。出牌阶段限一次，你可以弃一枚“霸”标记并令一名角色摸2张"],["坚毅","锁定技","当你于回合外一次性受到2点以上伤害时，你增加1点体力上限并恢复1点体力。"]]},{"n":"吴绎如","f":"生","hp":3,"col":"#74b9ff","sk":[["监工","普通","游戏开始时，你获得“工”标记。你的回合结束时，你可以将“工”标记置于1名其他角色旁（不与上回合角色相同）。有“工”标记的角色无法"],["排阵","锁定技","准备阶段，你观看牌堆顶的X张牌并获得其中的基本牌（X为你使用“工”标记的次数且至多为7）。"]]},{"n":"吴卓荣","f":"生","hp":3,"col":"#00b8d4","sk":[["肘击","锁定技","你的所有武器牌均视为【诸葛连弩】。"],["曼巴","锁定技","你的所有防具牌均视为【仁王盾】。"],["破甲","锁定技","你对穿戴防具的角色造成伤害时，该伤害+1且弃置其防具。"],["败纹","锁定技","弃牌阶段，你需弃置X张手牌（X为你本回合使用的基本牌数量，不足则全弃）。"]]},{"n":"肖宏强","f":"生","hp":3,"col":"#b33939","sk":[["酒池","锁定技","准备阶段，你选择X+1项：①你于摸牌阶段内多摸1张牌 ②你于出牌阶段内的出杀次数+1 ③结束阶段你摸2张牌 ④本回合对其他角色使"],["吨酒","锁定技","当你使一名角色脱离濒死状态时，你摸1张牌。你的【酒】可对其他角色使用，你的【酒】不计入你的手牌上限。"],["预言","普通","每名其他角色的回合限一次，当该角色将要使用1张牌时，你可以猜测这张牌的花色，若猜测正确，则你从牌堆中获得1张【酒】；若猜测错误，"]]},{"n":"谢睿瑶","f":"生","hp":3,"col":"#4b7bec","sk":[["勤学","锁定技","你没有摸牌阶段。准备阶段，你翻开X张牌并获得至多4张不同花色的牌（X为当前全场体力上限最高的角色的体力上限）。"],["编排","普通","每名其他角色的回合限一次，当你成为1张牌的目标时，你可以令该牌使用者选择一项：①其摸2张牌，将此牌的目标改为你攻击范围内的1名角"]]},{"n":"熊子玮","f":"生","hp":3,"col":"#a29bfe","sk":[["布局","转换技","出牌阶段限一次，你可以将一张♠牌当作任意一张非延时锦囊牌打出（不与上回合相同），然后你执行：①观看牌堆顶的X张牌并获得其中的♠牌"],["破局","锁定技","你的结束阶段，你执行Y项：①从牌堆中获得1张♠牌 ②弃置1名其他角色的1张♠牌 ③在下一回合前♠牌对你无效且♠牌在下一回合不计入"]]},{"n":"徐承灏","f":"生","hp":1,"col":"#576574","sk":[["虚无","锁定技","其他角色使用基本牌及锦囊牌均无法指定你为目标，你免疫所有伤害，你每回合的出杀次数为2且无距离限制，你的【桃】【酒】均视为【杀】，"],["散财","锁定技","自你登场的回合起，若连续五个回合（含登场回合）你都没有击杀过任何角色，则第五个回合结束时你立即死亡，并视为使用一张【五谷丰登】（"]]},{"n":"徐梓桓","f":"生","hp":3,"col":"#e58e26","sk":[["王化","锁定技","当你对一名已受伤的角色造成1点伤害时，你摸1张牌。若有角色因你使用的牌进入濒死状态，你获得其所有牌。你对已受伤的角色使用牌无距离"],["复仇","锁定技","体力上限与你相同的角色在你的回合内均视为已受伤。"]]},{"n":"张诗源","f":"生","hp":4,"col":"#c44569","sk":[["独苗","锁定技","若你为全场唯一忠臣/反贼，你需翻开你的身份牌。"],["气愤","普通","游戏开始时，你获得3个“愤”标记。当你造成或受到1点伤害时，你获得一个“愤”标记。你的出牌阶段限一次，你可以弃置一枚“愤”标记，"],["余烈","锁定技","当你处于翻回正面状态时，其他角色计算与你的距离+1。当你复原时，你获得一枚“愤”标记。"]]},{"n":"章谊","f":"生","hp":3,"col":"#20bf6b","sk":[["利诱","普通","出牌阶段限X次，你可以将1张牌背面朝上当作任意一张牌打出，当有角色质疑并翻开这张牌时，若为假则此牌作废且你失去一点体力，若为真则"],["连横","锁定技","你的♣手牌均视为【铁索连环】，你使用的【铁索连环】重铸摸牌数及连环人数均+1。【铁索连环】对你无效。"],["金汤","锁定技","你受到的元素伤害-1。"]]},{"n":"赵雯希","f":"生","hp":3,"col":"#f8a5c2","sk":[["逐峰","锁定技","你对体力值大于你的角色使用牌无距离与次数限制。"],["乐剧","普通","出牌阶段限一次，你可以将任意一张手牌当作【乐不思蜀】使用。当你成为【乐不思蜀】的目标时，你可以摸1张牌且可以在判定阶段将一张手牌"],["舞动","锁定技","当你的体力值或手牌数变化后，若此时你的体力值不大于/大于你的手牌数，其他计算与你的距离+1/-1，你计算与其他角色的距离-1/+"]]},{"n":"周雪怡","f":"生","hp":3,"col":"#fd9644","sk":[["起舞","普通","游戏开始时，你获得3枚“舞”标记，出牌阶段开始时，你可以弃置一枚“舞”标记并横置两名在你攻击范围内的角色。当你使用一张【杀】指定"],["舞王","锁定技","当你的体力值或体力上限变化时，你获得一枚“舞”标记。"],["雪王","觉醒技","准备阶段，若你的“舞”标记超过5个，你移去所有“舞”标记，恢复体力至两点并横置所有其他角色，修改【起舞】。"]]},{"n":"朱可欣","f":"生","hp":2,"col":"#f7b731","sk":[["富贵","锁定技","游戏开始时，你多摸X张牌，体力上限与手牌上限加X，你出牌阶段内只能使用X+1张牌（X为初始全场势力数）。"],["万贯","锁定技","从你于出牌阶段内使用的第一张牌开始，你每使用一张与上一张颜色不同的牌，你便摸两张牌。"]]},{"n":"熊朝钰","f":"生","hp":3,"col":"#eb3b5a","sk":[["首脑","锁定技","你于摸牌阶段多摸2张牌，♦杀对你无效。"],["强干","普通","当你的手牌中有四种不同花色的手牌时，你可以弃置这4张牌，并对至多2名角色造成至多2点火焰伤害。若你为一名角色分配2点及以上的伤害"],["收款","普通","每名其他角色的回合中，当有点数不大于5的牌进入弃牌堆时，你可以获得之。你于每名其他角色的回合内以此法获得的牌不得超过2张。"]]},{"n":"张想","f":"生","hp":3,"col":"#786fa6","sk":[["魔改","锁定技","在你的回合内，其他角色的锁定技均视为非锁定技。"],["对弈","锁定技","你没有摸牌阶段。你的摸牌方式改为获得与你距离为1的角色的各一张手牌，然后你展示之，并根据花色种类在本回合获得以下效果（可叠加）："],["轶骑","锁定技","当你于出牌阶段对其他角色使用【杀】时，你可以令其非锁定技能失效，然后你令其进行一次判定，除非该角色弃置与该判定牌花色相同的手牌，"],["银角","蓄势技","锁定技，当你失去装备区中的一张牌时，你获得一层“势”，当“势”达到3层时，你于一名角色的结束阶段发动该技能并清空所有“势”，然后"]]},{"n":"朱煜罗赫","f":"生","hp":4,"col":"#b71540","sk":[["巧算","转换技","锁定技，你的弃牌阶段结束后，若你弃置的牌的点数之和或积恰好等于全场角色体力值之和或积，则：①在你的下一回合开始前元素伤害及伤害类"]]},{"n":"胡煜堃","f":"生","hp":3,"col":"#3867d6","sk":[["电学","锁定技","你的点数大于7的黑色锦囊牌均视为【闪】。"],["元素","锁定技","你的红色杀视为火杀，黑色杀视为雷杀。"],["燃城","普通","你可以将元素杀按如下方式打出：① 两张火杀：视为“火炮”。对目标角色造成1点火焰伤害并令其获得“火”标记，当其再次受到火焰伤害时"],["补给","锁定技","当你的手牌中没有杀时，你从摸牌堆中获得1张杀；当你没有对应标记时，你免疫相对应的元素伤害。"]]},{"n":"熊欣振宇","f":"生","hp":4,"col":"#e056fd","sk":[["急攻","锁定技","出牌阶段开始时，你摸2张牌，本回合你的手牌上限改为在本回合造成的伤害量。"],["厚积","普通","准备阶段，你可以进行一次判定，若为红色牌，则你获得之，然后你可以重复此流程直至出现黑色牌，以此法获得的牌在本回合不计入你的手牌上"],["薄发","觉醒技","当你进入濒死状态时，你将体力恢复至2点，修改【急攻】，失去【厚积】并获得【求援】。"],["求援","普通","每名其他角色的回合限一次，当你成为1张牌的唯一目标时，若此时你没有任何手牌，你可以令不是该牌使用者的角色选择一项：① 其摸1张牌"]]},{"n":"高知远","f":"生","hp":3,"col":"#0fb9b1","sk":[["抚蛮","锁定技","【南蛮入侵】对你无效。当有其他角色使用的【南蛮入侵】进入弃牌堆时，你获得之，你使用的【南蛮入侵】所造成的伤害+1。"],["制蛮","普通","出牌阶段限一次，你可以将两张黑色手牌当作【南蛮入侵】打出。结算完成后，你摸X张牌，且以此法获得的牌在本回合不计入你的手牌上限（X"],["谋士","锁定技","♠牌不计入你的手牌上限。当你于回合外获得♠牌时，你额外摸一张牌。"]]},{"n":"万可馨＆肖钰轩","f":"生","hp":3,"col":"#4b6584","sk":[["绘色","锁定技","若你的装备区中没有武器牌，则你视为装备【朱雀羽扇】。"],["神笔","普通","出牌阶段限X次，你可以弃置1张基本牌/非基本牌，然后令你的下一张非基本牌/基本牌无法被响应。若有角色因此受到的伤害超过1点，则你"],["归纳","普通","每名其他角色的弃牌阶段结束时，若其弃置的牌中有基本牌，你可以获得其中点数最小的一张；若有非基本牌，则你可以获得其中点数最大的一张"]]},{"n":"陶温璇","f":"生","hp":3,"col":"#cd6133","sk":[["辅温","普通","出牌阶段限一次，你可以弃置1张基本牌/非基本牌，然后令一名场上手牌最少与一名手牌最多的角色／装备区牌最少（至少一张）与装备区牌最"],["抚恤","普通","当有1名角色受到1点伤害时，你可以弃置1张基本牌并令其进行一次判定，若结果为：♥：其回复1点体力；♦：获得伤害来源的1张牌；♠："],["亡语","锁定技","当你死亡时，杀死你的角色失去其所有锁定技，然后你查看杀死你的角色的身份牌并告诉主公，最后除这名角色外的所有角色摸3张牌。"]]},{"n":"熊梁祥","f":"生","hp":4,"col":"#fa8231","sk":[["积淀","普通","游戏开始时，你多摸2张牌并将2张手牌置于武将牌上，称为“暴”。出牌阶段，你可以用等量手牌替换“暴”。每名角色的结束阶段，你可以摸"],["暴起","普通","一名其他角色的准备阶段，若你的“暴”有四种花色，则你可以移去所有“暴”，你与其各摸4张牌并令其本回合出【杀】次数与攻击范围无限（"]]},{"n":"饶宸语","f":"生","hp":5,"col":"#8854d0","sk":[["矢志","普通","每名角色的回合限一次，当你造成伤害后，你可以选择一项：①摸X张牌 ②回复X点体力（X为场上体力值最高与最低的角色的体力值之差）。"],["自强","觉醒技","每名角色的准备阶段，若你的体力值与手牌数相差不小于3，则你获得【登峰】并修改【矢志】且扣减1点体力上限。"],["登峰","觉醒技","每名角色的准备阶段，若你的体力值或手牌数不大于2，则你扣减1点体力上限，修改【矢志⁺】并获得【造极】。"],["造极","普通","出牌阶段限一次，你可以弃置所有手牌，然后摸2倍数量的牌（不超过10）。若如此做，本回合你的攻击范围无限且出牌阶段结束时你弃置所有"]]}];
+
+/* ---------- 图鉴 ---------- */
+(function(){
+  const grid = document.getElementById('cg');
+  const count = document.getElementById('codex-count');
+  const q = document.getElementById('q');
+  const chips = Array.prototype.slice.call(document.querySelectorAll('.codex-bar .chip'));
+  let fac = 'all', kw = '';
+
+  function hearts(n){
+    let s = '';
+    for (let i = 0; i < n; i++) s += '♥';
+    return s;
+  }
+  function esc(t){
+    return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function match(c){
+    if (fac !== 'all' && c.f !== fac) return false;
+    if (!kw) return true;
+    const hay = c.n + ' ' + c.sk.map(s => s[0]).join(' ');
+    return hay.indexOf(kw) >= 0;
+  }
+  function render(){
+    const list = CHARS.filter(match);
+    grid.innerHTML = list.map(function(c, i){
+      return '<article class="cc" data-i="' + CHARS.indexOf(c) + '" tabindex="0" role="button" aria-label="' + esc(c.n) + ' 的技能">'
+        + '<span class="fa">' + esc(c.f) + '</span>'
+        + '<div class="av" style="background:' + esc(c.col) + '">' + esc(c.n.charAt(0)) + '</div>'
+        + '<div class="nm">' + esc(c.n) + '</div>'
+        + '<div class="hp">' + hearts(c.hp) + '</div>'
+        + '<div class="sk">' + esc(c.sk.map(s => s[0]).join(' · ')) + '</div>'
+        + '</article>';
+    }).join('');
+    count.textContent = kw || fac !== 'all'
+      ? '筛出 ' + list.length + ' 名角色'
+      : '共 ' + CHARS.length + ' 名角色';
+  }
+
+  chips.forEach(function(ch){
+    ch.addEventListener('click', function(){
+      chips.forEach(x => x.classList.remove('on'));
+      ch.classList.add('on');
+      fac = ch.dataset.f;
+      render();
+    });
+  });
+  q.addEventListener('input', function(){ kw = q.value.trim(); render(); });
+
+  const modal = document.getElementById('modal');
+  const mAv = document.getElementById('mc-av');
+  const mNm = document.getElementById('mc-nm');
+  const mMeta = document.getElementById('mc-meta');
+  const mBody = document.getElementById('mc-body');
+
+  function open(i){
+    const c = CHARS[i];
+    if (!c) return;
+    mAv.style.background = c.col;
+    mAv.textContent = c.n.charAt(0);
+    mNm.textContent = c.n;
+    mMeta.textContent = (c.f === '师' ? '老师' : '学生') + ' · ' + c.hp + ' 点体力 · ' + c.sk.length + ' 个技能';
+    mBody.innerHTML = c.sk.map(function(s){
+      return '<div class="skill"><div class="top"><span class="sn">【' + esc(s[0]) + '】</span>'
+        + '<span class="kind">' + esc(s[1]) + '</span></div>'
+        + '<p class="sd">' + esc(s[2]) + '…</p></div>';
+    }).join('');
+    modal.classList.add('on');
+    document.body.style.overflow = 'hidden';
+  }
+  function close(){
+    modal.classList.remove('on');
+    document.body.style.overflow = '';
+  }
+  grid.addEventListener('click', function(e){
+    const card = e.target.closest('.cc');
+    if (card) open(+card.dataset.i);
+  });
+  grid.addEventListener('keydown', function(e){
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const card = e.target.closest('.cc');
+    if (card){ e.preventDefault(); open(+card.dataset.i); }
+  });
+  document.getElementById('mc-close').addEventListener('click', close);
+  modal.addEventListener('click', function(e){ if (e.target === modal) close(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && modal.classList.contains('on')) close();
+  });
+
+  render();
+})();
+
+</script>
+</div>
+</body>
+</html>
